@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class AdminController extends Controller
 {
     /**
-     * @Route("/admin/list")
+     * @Route("/admin/list", name="admin_list_post")
      */
     public function listAction()
     {
@@ -18,7 +18,7 @@ class AdminController extends Controller
     }
 
     /**
-     * @Route("/admin/add")
+     * @Route("/admin/add", name="admin_add_post")
      */
     public function addAction()
     {
