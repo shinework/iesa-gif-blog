@@ -99,3 +99,60 @@ Changer le template de la page d'accueil pour qu'il pointe vers votre propre tem
 
 Documentation: [Créer sa première page sur Symfony](http://symfony.com/doc/2.8/book/page_creation.html)
 
+Code à cette étape:
+[https://github.com/shinework/iesa-gif-blog](https://github.com/shinework/iesa-gif-blog)
+
+### 4 - Un peu de design
+
+**Référence slide Twig:** slide 32 - jour 2
+
+Il est temps de créer un layout pour votre site (header / menu / …). Faites vous plaisir :)
+
+> Tips: utilisez des feuilles de styles dans le fichier `app/Resources/views/base.html.twig`  avec [Bootstrap](http://getbootstrap.com) par exemple. Il existe également des thèmes Bootstrap [sur ce site](https://bootswatch.com/).
+
+### 5 - Entités / Modèle de données
+
+#### Entités
+**Référence slide Doctrine:** slide 10 - jour 2
+
+Il faut ajouter vos entités à votre projet Symfony. Pour notre blog, nous avons:
+
+ - Une entité `Post` avec un `id`, un `titre`, une `url`, une `date de création` et une valeur indiquant si le post est `en ligne`  
+ - Une entité `Tag` avec un `id`, et un `tag` 
+
+Un `Post` peut avoir 0 ou plusieurs tags, et un `Tag` peut être attaché à plusieurs Post (relation `ManyToMany`)
+
+Utiliser la commande `php app/console doctrine:generate:entity` pour  générer vos entités puis ajoutez les relations à la main (cf slides 18 - jour 2). 
+
+Vous devez avoir des paramètres de connexion valides dans votre fichier `app/config/parameters.yml` et avoir crée votre base de données avec la commande `php app/console doctrine:database:create`.
+
+> Rappel: pour synchroniser votre base de données avec vos entités Symfony2, utilisez la commande `php app/console doctrine:schema:update`
+
+#### Fixtures
+**Référence slide Doctrine:** slide 29 - jour 2
+
+Ajouter des fixtures (données de test) à votre projet grâce au bundle [DoctrineFixturesBundle](http://symfony.com/doc/current/bundles/DoctrineFixturesBundle/index.html).
+
+Vous pouvez faire appel à [l'API du Giphy](https://github.com/Giphy/GiphyAPI) pour récupérer des gifs animées. Voici un exemple de requête de l'API Giphy:
+
+http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC
+
+Pour interroger l'API, vous pouvez utiliser [la librairie Guzzle](https://github.com/guzzle/guzzle) en l'installant avec Composer. 
+
+`composer require guzzlehttp/guzzle 6.1.1`
+
+Pour utiliser la version 6 il faut au minimum php `5.5.0`, mettez à jour la version minium de php dans votre fichier `composer.json` à la racine de votre projet:
+
+```
+"config": {
+        "bin-dir": "bin",
+        "platform": {
+            "php": "5.5.0"
+        }
+    },
+```
+
+[Ensuite lisez la doc](http://docs.guzzlephp.org/en/latest/) de Guzzle pour savoir comment l'utiliser.
+
+
+> Tips: vous devez utiliser la fonction php [json_decode](http://php.net/manual/fr/function.json-decode.php) pour passer le résultat de l'API json en array php
