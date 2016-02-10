@@ -22,7 +22,7 @@ class LoadUserData implements FixtureInterface
             $post->setIsPublished(true);
             $post->setCreatedAt(new \DateTime());
             $post->setTitle($gif['slug']);
-            $post->setUrl($gif['images']['fixed_width']['url']);
+            $post->setUrl($gif['images']['fixed_height']['url']);
 
             $manager->persist($post);
             $manager->flush();

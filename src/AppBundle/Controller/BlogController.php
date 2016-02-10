@@ -26,7 +26,10 @@ class BlogController extends Controller
      */
     public function viewAction($idPost)
     {
+        $post = $this->getDoctrine()->getRepository(Post::class)->find($idPost);
+
         return $this->render('AppBundle:Blog:view.html.twig', array(
+            'post' => $post
         ));
     }
 }

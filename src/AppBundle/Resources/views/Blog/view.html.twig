@@ -3,5 +3,8 @@
 {% block title %}AppBundle:Blog:view{% endblock %}
 
 {% block body %}
-<h1>View post</h1>
+    <h1>{{ post.title }}</h1>
+    <img src="{{ post.url }}">
+    <hr>
+    <a href="{{ path('homepage') }}" class="btn btn-primary" role="button">Retour</a>
 {% endblock %}
