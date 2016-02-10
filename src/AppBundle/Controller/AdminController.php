@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Post;
+use AppBundle\Form\ProposePostType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -54,10 +55,30 @@ class AdminController extends Controller
     /**
      * @Route("/admin/add", name="admin_add_post")
      */
-    public function addAction()
+    public function addAction(Request $request)
     {
+        $post = new Post();
+        $form = $this->createForm(new ProposePostType(), $post);
+
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+
+                // Save the proposition
+                $post->setCreatedAt(new \DateTime());
+                $post->setIsPublished(false);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($post);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('admin_list_post'));
+            }
+        }
+
         return $this->render('AppBundle:Admin:add.html.twig', array(
-            // ...
+            'form' => $form->createView()
         ));
     }
 }
