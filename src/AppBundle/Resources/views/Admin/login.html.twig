@@ -7,13 +7,17 @@
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    <form action="{{ path('login_check') }}" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" />
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password" />
+    <form class="col-sm-4 col-sm-offset-4" action="{{ path('login_check') }}" method="post">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Login</label>
+            <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Mot de passe</label>
+            <input type="password" class="form-control" id="password" name="_password" placeholder="Password">
+        </div>
 
-        <button type="submit">login</button>
+        <button type="submit" class="btn btn-default">Connexion</button>
     </form>
 {% endblock %}
