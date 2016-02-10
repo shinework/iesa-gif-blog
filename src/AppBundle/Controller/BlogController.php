@@ -17,4 +17,13 @@ class BlogController extends Controller
         return $this->render('AppBundle:Blog:index.html.twig', array(
         ));
     }
+
+    /**
+     * @Route("/view/{idPost}", name="view_post")
+     */
+    public function viewAction($idPost)
+    {
+        return $this->render('AppBundle:Blog:view.html.twig', array(
+        ));
+    }
 }
