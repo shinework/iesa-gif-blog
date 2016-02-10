@@ -1,7 +1,32 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}AppBundle:Admin:list{% endblock %}
+{% block title %}Admin - Les posts{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Admin:list page</h1>
+    <h1>Admin - Les posts</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Titre</th>
+                <th>Publié</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for post in posts %}
+            <tr>
+                <th scope="row">{{ post.id }}</th>
+                <td>{{ post.title }}</td>
+                <td>
+                    {% if post.isPublished %}Oui{% else %}Non{% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('view_post', {idPost: post.id}) }}" class="btn btn-primary btn-sm">Voir</a>
+                </td>
+            </tr>
+        {% endfor %}
+         </tbody>
+    </table>
 {% endblock %}
