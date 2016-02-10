@@ -25,6 +25,8 @@
                 </td>
                 <td>
                     <a href="{{ path('view_post', {idPost: post.id}) }}" class="btn btn-primary btn-sm">Voir</a>
+                    <a href="{{ path('admin_update_post', {idPost: post.id}) }}" class="btn btn-primary btn-sm">Modifier</a>
+                    <a href="{{ path('admin_delete_post', {idPost: post.id}) }}" class="btn btn-danger btn-sm">X</a>
                 </td>
             </tr>
         {% endfor %}

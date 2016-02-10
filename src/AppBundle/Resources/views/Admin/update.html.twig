@@ -1,0 +1,12 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Admin - Ajouter un post{% endblock %}
+
+{% block body %}
+    <h1>Admin - Modifier le post {{ post.id }}</h1>
+
+    <form class="col-md-6" action="{{ path('admin_update_post', {idPost: post.id}) }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <input type="submit" class="btn btn-success" value="Modifier le post">
+    </form>
+{% endblock %}

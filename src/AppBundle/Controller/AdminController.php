@@ -4,8 +4,10 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Post;
 use AppBundle\Form\ProposePostType;
+use AppBundle\Form\UpdatePostType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdminController extends Controller
@@ -80,5 +82,45 @@ class AdminController extends Controller
         return $this->render('AppBundle:Admin:add.html.twig', array(
             'form' => $form->createView()
         ));
+    }
+
+    /**
+     * @Route("/admin/update/{idPost}", name="admin_update_post")
+     */
+    public function updateAction(Request $request, $idPost)
+    {
+        $post = $this->getDoctrine()->getRepository(Post::class)->find($idPost);
+        $form = $this->createForm(new UpdatePostType(), $post);
+
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($post);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('admin_list_post'));
+            }
+        }
+
+        return $this->render('AppBundle:Admin:update.html.twig', array(
+            'form' => $form->createView(),
+            'post' => $post,
+        ));
+    }
+
+    /**
+     * @Route("/admin/delete/{idPost}", name="admin_delete_post")
+     */
+    public function deleteAction(Request $request, $idPost)
+    {
+        $post = $this->getDoctrine()->getRepository(Post::class)->find($idPost);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($post);
+        $em->flush();
+
+        $response = new RedirectResponse($this->get('router')->generate('admin_list_post'));
+        return $response;
     }
 }
