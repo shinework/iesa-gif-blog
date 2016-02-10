@@ -62,6 +62,11 @@ Page d'accueil
 `/` 
 >Liste les posts (contenant un titre et un lien de GIF), cette page dispose d'une pagination et afficher uniquement 20 GIF par page.
 
+**Page post**
+
+`/view/{idPost}` 
+>Affiche le post dont l'id est passé par l'url
+
 **Pages admin (protégé par identification passe)**
  
 Ajout de post 
@@ -72,7 +77,7 @@ Liste des posts
 `/admin/add`
 >Page listant tout les posts du site et permettant des les supprimer.
 
-Renommez le `DefaultController.php` en `BlogController.php`, n'oubliez pas de renommer le nom de la classe également. Le contrôleur contient déjà la page d'accueil.
+Renommez le `DefaultController.php` en `BlogController.php`, n'oubliez pas de renommer le nom de la classe également. Le contrôleur contient déjà la page d'accueil. Il faut ajouter l'action qui se charge d'afficher un post soit `viewAction()` avec pour route `/view/{idPost}` . Faites les modifications nécessaires (pensez à créer le template associé).
 
 Ajoutez le contrôleur à votre AppBundle pour les pages d'administrations `AdminController.php`  grâce à la commande:
 
@@ -94,6 +99,7 @@ Vouas avez maintenant trois pages actives:
  - http://127.0.0.1:8000/
  - http://127.0.0.1:8000/admin/list
  - http://127.0.0.1:8000/admin/add
+ - http://127.0.0.1:8000/view/1
 
 Changer le template de la page d'accueil pour qu'il pointe vers votre propre template (`src/AppBundle/Resources/views/Blog/index.html.twig`) et non plus vers `app/Resources/views/default/index.html.twig` que vous pouvez supprimer.
 
@@ -154,5 +160,20 @@ Pour utiliser la version 6 il faut au minimum php `5.5.0`, mettez à jour la ver
 
 [Ensuite lisez la doc](http://docs.guzzlephp.org/en/latest/) de Guzzle pour savoir comment l'utiliser.
 
-
 > Tips: vous devez utiliser la fonction php [json_decode](http://php.net/manual/fr/function.json-decode.php) pour passer le résultat de l'API json en array php
+
+### 5 - Compléter le code du contrôleur Blog
+
+Maintenant que vous avez des fixtures, vous pouvez compléter le code des actions du contrôleur Blog. 
+
+**Dans l'action index**: 
+
+ 1. Récupérer les posts publiés grâce au `repository` Post;
+ 2. Passer le tableau de Post à votre vue; 
+ 3. Afficher les posts dans votre template Twig `src/AppBundle/Resources/views/Blog/index.html.twig`
+ 
+**Dans l'action view**: 
+
+ 1. Récupérer le post grâce au `repository` Post et à l'id passé en url;
+ 2. Passer l'entité post à votre vue; 
+ 3. Afficher le post dans votre template Twig `src/AppBundle/Resources/views/Blog/view.html.twig`

@@ -26,11 +26,17 @@ class AdminController extends Controller
     }
 
     /**
-     * @Route("/admin/login_check", name="login_check")
+     * @Route("/admin/login-check", name="login_check")
      */
-    public function securityCheckAction()
+    public function loginCheckAction()
     {
-        // The security layer will intercept this request
+    }
+
+    /**
+    * @Route("/admin/logout", name="logout")
+    */
+    public function logoutAction()
+    {
     }
 
     /**
