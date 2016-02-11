@@ -12,7 +12,7 @@ class LoadUserData implements FixtureInterface
     public function load(ObjectManager $manager)
     {
         $client = new GuzzleHttp\Client();
-        $response = $client->request('GET', 'http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC');
+        $response = $client->request('GET', 'http://api.giphy.com/v1/gifs/search?q=gameofthrone&api_key=dc6zaTOxFJmzC');
 
         $result = json_decode($response->getBody(), true);
 

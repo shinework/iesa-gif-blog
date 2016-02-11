@@ -6,7 +6,7 @@
 <h1>Posts</h1>
 <hr>
 <div class="row">
-    {% for post in posts %}
+    {% for post in postsPaginated %}
         <div class="col-sm-6 col-md-4">
             <div class="thumbnail" style="overflow: hidden">
                 <div class="caption">
@@ -18,6 +18,9 @@
         </div>
     {% endfor %}
 </div>
-<b><a href=""></a></b><hr>
+
+<div class="navigation">
+    {{ knp_pagination_render(postsPaginated) }}
+</div>
 
 {% endblock %}

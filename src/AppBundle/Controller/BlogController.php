@@ -14,10 +14,13 @@ class BlogController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $posts = $this->getDoctrine()->getRepository(Post::class)->findBy(['isPublished' => true]);
+        $query = $this->getDoctrine()->getRepository(Post::class)->getPublishedGifQuery();
+
+        $paginator  = $this->get('knp_paginator');
+        $postsPaginated = $paginator->paginate($query, $request->query->get('page', 1), 6);
 
         return $this->render('AppBundle:Blog:index.html.twig', [
-            'posts' => $posts
+            'postsPaginated' => $postsPaginated
         ]);
     }
 

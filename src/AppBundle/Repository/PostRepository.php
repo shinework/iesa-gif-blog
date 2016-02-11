@@ -12,4 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class PostRepository extends EntityRepository
 {
+    public function getPublishedGifQuery()
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p')
+            ->where('p.isPublished = :isPublished')
+            ->setParameter('isPublished', true)
+            ->getQuery()
+        ;
+    }
 }
