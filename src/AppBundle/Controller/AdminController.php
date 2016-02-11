@@ -3,7 +3,9 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Post;
+use AppBundle\Entity\Tag;
 use AppBundle\Form\ProposePostType;
+use AppBundle\Form\ProposeTagType;
 use AppBundle\Form\UpdatePostType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -122,5 +124,30 @@ class AdminController extends Controller
 
         $response = new RedirectResponse($this->get('router')->generate('admin_list_post'));
         return $response;
+    }
+
+    /**
+     * @Route("/admin/tag/add", name="admin_add_tag")
+     */
+    public function addTagAction(Request $request)
+    {
+        $tag = new Tag();
+        $form = $this->createForm(new ProposeTagType(), $tag);
+
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($tag);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('admin_list_post'));
+            }
+        }
+
+        return $this->render('AppBundle:Admin:addTag.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 }

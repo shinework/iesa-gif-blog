@@ -12,9 +12,10 @@ class ProposePostType extends AbstractType
         $builder
             ->add('title')
             ->add('url')
-            ->add('tags', 'entity', array(
+            ->add('tags', 'entity', [
                 'class' => 'AppBundle\Entity\Tag',
-            ))
+                'multiple' => true,
+            ])
         ;
     }
     public function setDefaultOptions(OptionsResolverInterface $resolver)

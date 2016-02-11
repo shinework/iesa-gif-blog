@@ -1,0 +1,12 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Admin - Ajouter un tag{% endblock %}
+
+{% block body %}
+    <h1>Admin - Ajouter un tag</h1>
+
+    <form class="col-md-6" action="{{ path('admin_add_tag') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <input type="submit" class="btn btn-success" value="Ajouter le tag">
+    </form>
+{% endblock %}

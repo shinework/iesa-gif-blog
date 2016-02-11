@@ -5,29 +5,22 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class UpdatePostType extends AbstractType
+class ProposeTagType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('url')
-            ->add('isPublished')
-            ->add('createdAt')
-            ->add('tags', 'entity', [
-                'class' => 'AppBundle\Entity\Tag',
-                'multiple' => true,
-            ])
+            ->add('tag')
         ;
     }
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Post',
+            'data_class' => 'AppBundle\Entity\Tag',
         ));
     }
     public function getName()
     {
-        return 'update_post_type';
+        return 'propose_tag_type';
     }
 }
