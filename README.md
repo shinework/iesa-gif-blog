@@ -1,11 +1,5 @@
 # TP: créer un GIF Blog avec Symfony2
 
-Slides cours:
-
- - [Jour 1](http://shinework.io/iesa/cours-jour1.pdf)
- - [Jour 2](http://shinework.io/iesa/cours-jour2.pdf)
- - [Jour 3](http://shinework.io/iesa/cours-jour3.pdf)
-
 ### 1 - Installer Symfony via Composer
 
 #### Composer
